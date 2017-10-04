@@ -1,6 +1,11 @@
 'use strict'
 
-const { customerDistance, processCustomerDistances, degreesToRadians } = require('../index')
+const {
+  customerDistance,
+  processCustomerDistances,
+  degreesToRadians,
+  latLonRadians
+} = require('../index')
 const expect = require('chai').expect
 
 
@@ -68,13 +73,23 @@ describe('customer_distance tests', () => {
       expect(degreesToRadians).to.be.a('function')
     })
 
-    // http://www.rapidtables.com/convert/number/degrees-to-radians.htm#table
+    // Values seen here: http://www.rapidtables.com/convert/number/degrees-to-radians.htm#table
     it('30 degrees should comes out to 0.5236', () => {
       expect(Math.round(degreesToRadians(30), 4)).to.equal(Math.round(0.5235987756, 4))
     })
 
     it('60 degrees should comes out to 0.8727', () => {
       expect(Math.round(degreesToRadians(30), 4)).to.equal(Math.round(0.872664626, 4))
+    })
+  });
+
+  describe('latLonRadians function', () => {
+    it('should export a function', () => {
+      expect(latLonRadians).to.be.a('function')
+    })
+
+    it('latLonRadians should return object with latitude and longitude in radians', () => {
+      expect(latLonRadians(53.3393, -6.2576841)).to.eql({lat: 53.3393 * Math.PI / 180, lon: -6.2576841 * Math.PI / 180 });
     })
   });
 })
