@@ -11,6 +11,10 @@ const customerDistance = () => {
 
 }
 
+/**
+ * Returns the radian value of the provided degrees.
+ * @param {number} degrees Degrees to be conveted
+ */
 const degreesToRadians = (degrees) => {
   return degrees * Math.PI / 180;
 }
