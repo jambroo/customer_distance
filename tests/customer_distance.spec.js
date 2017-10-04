@@ -6,7 +6,7 @@ const {
   degreesToRadians,
   latLonRadians,
   distanceToOffice
-} = require('../index')
+} = require('../customer_distance')
 const expect = require('chai').expect
 
 
