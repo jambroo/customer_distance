@@ -1,6 +1,6 @@
 'use strict'
 
-const { customerDistance, processCustomerDistances } = require('../index')
+const { customerDistance, processCustomerDistances, degreesToRadians } = require('../index')
 const expect = require('chai').expect
 
 
@@ -9,7 +9,7 @@ describe('customer_distance tests', () => {
     it('should export a function', () => {
       expect(customerDistance).to.be.a('function')
     })
-  }
+  });
 
   describe('processCustomerDistances function', () => {
     it('should export a function', () => {
@@ -61,5 +61,20 @@ describe('customer_distance tests', () => {
       }];
       expect(processCustomerDistances(test_db)).to.equal("1 James Brooking\n4 Jane Doe")
     })
-  })
+  });
+
+  describe('degreesToRadians function', () => {
+    it('should export a function', () => {
+      expect(degreesToRadians).to.be.a('function')
+    })
+
+    // http://www.rapidtables.com/convert/number/degrees-to-radians.htm#table
+    it('30 degrees should comes out to 0.5236', () => {
+      expect(Math.round(degreesToRadians(30), 4)).to.equal(Math.round(0.5235987756, 4))
+    })
+
+    it('60 degrees should comes out to 0.8727', () => {
+      expect(Math.round(degreesToRadians(30), 4)).to.equal(Math.round(0.872664626, 4))
+    })
+  });
 })
