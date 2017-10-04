@@ -1,0 +1,7 @@
+{
+  "name": "customer_distance",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "James Brooking",
+  "license": "MIT"
+}
