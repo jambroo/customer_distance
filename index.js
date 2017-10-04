@@ -8,21 +8,49 @@ const EARTH_RADIUS = 6371; // KM - from https://en.wikipedia.org/wiki/Earth_radi
 const CUSTOMER_DB = './customers.json';
 
 /*
-  This will contain the main funcion to read the JSON and output customers within 100km of the Dublin office
+  Read database file and calculate distances. Filter these by distances < 100,
+  sort by user ID and output to console a list of names and user IDs of these users.
 */
 const customerDistance = () => {
   // The customers.json file is not a valid JSON list so it will need to be read line by line
   // If it was a json list we could have used the require function here.
+  let db = [];
   try {
     const dbRaw = fs.readFileSync(CUSTOMER_DB, 'utf8');
-    const db = dbRaw.trim().split("\n").map((line) => {
+    db = dbRaw.trim().split("\n").map((line) => {
       return JSON.parse(line);
-    });
-
-    // db here will be an array now
+    })
   } catch (e) {
     throw new Error("Can't read customers.json file.");
   }
+
+  // Calculate distance to office for each customer
+  db.map((customer) => {
+    customer.distance = distanceToOffice(customer.latitude, customer.longitude);
+
+    return customer;
+  })
+
+  // Filter customers over 100km away from office
+  db.filter((customer) => {
+    return customer.distance < 100;
+  });
+
+  // Making assumption here user ID is unique.
+  // The following sort array return < 0 if a should be in index before b,
+  // return > 0 if a should be in a index after b and return 0 when they do
+  // not need to be changed.
+  let result = db.sort((a, b) => {
+    return a.user_id - b.user_id
+  })
+
+  // Pepare result for output. Each line should have user ID and name.
+  result = result.map(a => {
+    return a.user_id + " " + a.name
+  }).join("\n");
+
+  console.log(result);
+
 }
 
 /**
