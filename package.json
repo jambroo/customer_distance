@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "James Brooking",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha tests/**.spec.js"
+  }
 }
