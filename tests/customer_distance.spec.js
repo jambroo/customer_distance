@@ -4,7 +4,8 @@ const {
   customerDistance,
   processCustomerDistances,
   degreesToRadians,
-  latLonRadians
+  latLonRadians,
+  distanceToOffice
 } = require('../index')
 const expect = require('chai').expect
 
@@ -90,6 +91,21 @@ describe('customer_distance tests', () => {
 
     it('latLonRadians should return object with latitude and longitude in radians', () => {
       expect(latLonRadians(53.3393, -6.2576841)).to.eql({lat: 53.3393 * Math.PI / 180, lon: -6.2576841 * Math.PI / 180 });
+    })
+  });
+
+  describe('distanceToOffice function', () => {
+    it('should export a function', () => {
+      expect(distanceToOffice).to.be.a('function')
+    })
+
+    it('given some coordinates as office result should be zero', () => {
+      expect(distanceToOffice(53.3393, -6.2576841)).to.eql(0);
+    })
+
+    it('given coordinates of the city of Cork distance should be around 200km', () => {
+      expect(distanceToOffice(51.8969, -8.4863)).to.be.above(200);
+      expect(distanceToOffice(51.8969, -8.4863)).to.be.below(300);
     })
   });
 })
