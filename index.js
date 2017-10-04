@@ -41,7 +41,7 @@ const processCustomerDistances = (db) => {
   })
 
   // Filter customers over 100km away from office
-  db.filter((customer) => {
+  db = db.filter((customer) => {
     return customer.distance < 100;
   });
 
