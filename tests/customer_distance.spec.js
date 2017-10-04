@@ -5,6 +5,12 @@ const expect = require('chai').expect
 
 
 describe('customer_distance tests', () => {
+  describe('customerDistance function', () => {
+    it('should export a function', () => {
+      expect(customerDistance).to.be.a('function')
+    })
+  }
+
   describe('processCustomerDistances function', () => {
     it('should export a function', () => {
       expect(processCustomerDistances).to.be.a('function')
