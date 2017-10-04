@@ -1,13 +1,28 @@
 'use strict'
 
+const fs = require('fs');
+
 const DUBLIN_OFFICE = {lat: 53.3393, lon: -6.2576841};
 const MAX_DISTANCE = 100; // KM
 const EARTH_RADIUS = 6371; // KM - from https://en.wikipedia.org/wiki/Earth_radius
+const CUSTOMER_DB = './customers.json';
 
 /*
   This will contain the main funcion to read the JSON and output customers within 100km of the Dublin office
 */
 const customerDistance = () => {
+  // The customers.json file is not a valid JSON list so it will need to be read line by line
+  // If it was a json list we could have used the require function here.
+  try {
+    const dbRaw = fs.readFileSync(CUSTOMER_DB, 'utf8');
+    const db = dbRaw.trim().split("\n").map((line) => {
+      return JSON.parse(line);
+    });
+
+    // db here will be an array now
+  } catch (e) {
+    throw new Error("Can't read customers.json file.");
+  }
 }
 
 /**
