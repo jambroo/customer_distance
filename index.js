@@ -24,6 +24,15 @@ const customerDistance = () => {
     throw new Error("Can't read customers.json file.");
   }
 
+  // Call main processing function. Mainly separated for ease of testing.
+  console.log(processCustomerDistances(db));
+}
+
+/**
+ * Process customer distances using provided database file.
+ * @param {array} db Array of customers data (originally from JSON file)
+ */
+const processCustomerDistances = (db) => {
   // Calculate distance to office for each customer
   db.map((customer) => {
     customer.distance = distanceToOffice(customer.latitude, customer.longitude);
@@ -49,8 +58,7 @@ const customerDistance = () => {
     return a.user_id + " " + a.name
   }).join("\n");
 
-  console.log(result);
-
+  return result;
 }
 
 /**
@@ -105,4 +113,10 @@ const degreesToRadians = (degrees) => {
    };
  }
 
-module.exports = customerDistance
+module.exports = {
+  customerDistance,
+  processCustomerDistances,
+  degreesToRadians,
+  latLonRadians,
+  distanceToOffice
+}
